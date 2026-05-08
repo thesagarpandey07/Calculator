@@ -27,6 +27,7 @@ function listenNumber()
     const nummbers=document.querySelectorAll(".keypad .number1");
     nummbers.forEach(number=>{
         number.addEventListener("click",(e)=>{
+            if(display1.textContent==="ERROR") AC();
             let target=e.target;
             display.textContent+=String(target.value);
             display1.textContent+=String(target.value);
@@ -40,6 +41,7 @@ function listenOperator()
     const operators=document.querySelectorAll(".keypad .operators");
     operators.forEach(operator=>{
         operator.addEventListener("click",(e)=>{
+            if(display1.textContent==="ERROR") AC();
             let target=e.target;
             operator_value=String(target.value);
             console.log(operator_value);
@@ -97,6 +99,11 @@ equalsTo.addEventListener("click",()=>{
 
 const clear=document.querySelector(".clear");
 clear.addEventListener("click",()=>{
+    AC();
+})
+
+function AC()
+{
     display1.textContent="";
     displayContent='';
     numBeforeOperator=0;
@@ -104,5 +111,4 @@ clear.addEventListener("click",()=>{
     numAfterOperator=1;
     result=0;
     last_Operator="";
-})
-
+}

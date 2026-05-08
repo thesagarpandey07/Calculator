@@ -55,6 +55,10 @@ function findOut()
 {
     console.log(display1.textContent);
     const arr=display1.textContent.split(/[+-/*]/);
+    console.log(arr);
+    if(arr[1]===undefined) {
+        console.log("returned due to arr[0]");
+        return;}
     if(arr[1]===""){
         display1.textContent=arr[0]+operator_value;
         last_Operator=operator_value;
@@ -82,7 +86,13 @@ function operate()
     if(last_Operator==="-") return subtract(numBeforeOperator,numAfterOperator);
     if(last_Operator==="/") return divide(numBeforeOperator,numAfterOperator);
     if(last_Operator==="*") return multiply(numBeforeOperator,numAfterOperator);
-    
 }
+
+const equalsTo=document.querySelector(".equalsto");
+equalsTo.addEventListener("click",()=>{
+    findOut();
+    operator_value="";
+    display1.textContent=String(result);
+})
 
 

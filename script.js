@@ -21,6 +21,7 @@ const display1=document.querySelector("div.display1");
 display1.textContent="";
 
 let displayContent='';
+let mode=0;
 
 function listenNumber()
 {
@@ -29,9 +30,11 @@ function listenNumber()
         number.addEventListener("click",(e)=>{
             if(display1.textContent==="ERROR") AC();
             let target=e.target;
+            if(mode===1) display.textContent="";
             display.textContent+=String(target.value);
             display1.textContent+=String(target.value);
             displayContent+=String(target.value);
+            mode=0;
         })
     })
 }
@@ -44,10 +47,14 @@ function listenOperator()
             if(display1.textContent==="ERROR") AC();
             let target=e.target;
             operator_value=String(target.value);
-            console.log(operator_value);
+            // console.log(operator_value);
             display1.textContent+=operator_value;
+            displayContent+=operator_value;
+            console.log(displayContent);
+            console.log(Number(displayContent));
+            console.log(Number(displayContent===NaN));
             findOut();
-            
+            mode=1;
         })
     })
 }
@@ -55,26 +62,32 @@ listenOperator();
 
 function findOut()
 {
-    console.log(display1.textContent);
+    // console.log(display1.textContent);
     const arr=display1.textContent.split(/[+-/*]/);
-    console.log(arr);
+    const arr1=displayContent.split(/[+-/*]/);
+    // console.log(arr);
     if(arr[1]===undefined) {
-        console.log("returned due to arr[0]");
+        // console.log("returned due to arr[0]");
         return;}
     if(arr[1]===""){
         display1.textContent=arr[0]+operator_value;
+        displayContent=arr1[0]+operator_value;
         last_Operator=operator_value;
-        console.log("Returned");
+        // console.log("Returned");
         return;
-    console.log("If i am present not returned");}
-    console.log("Not returned");
+    // console.log("If i am present not returned");
+}
+    // console.log("Not returned");
     numBeforeOperator=Number(arr[0]);
     numAfterOperator=Number(arr[1]);
     result=operate();
     last_Operator=operator_value;
-    console.log(result);
+    // console.log(result);
     display1.textContent=String(result)+operator_value;
-    displayContent=String(result);
+    display.textContent=String(result);
+    mode=1;
+    displayContent=String(result)+operator_value;
+    // displayContent=String(result);
     return;
 }
 function operate()
@@ -82,8 +95,8 @@ function operate()
     result=0;
     if(last_Operator==="+") {
         result= add(numBeforeOperator,numAfterOperator);
-        console.log("I am adder");
-        console.log(result);
+        // console.log("I am adder");
+        // console.log(result);
     return result;}
     if(last_Operator==="-") return subtract(numBeforeOperator,numAfterOperator);
     if(last_Operator==="/") return divide(numBeforeOperator,numAfterOperator);
@@ -95,6 +108,7 @@ equalsTo.addEventListener("click",()=>{
     findOut();
     operator_value="";
     display1.textContent=String(result);
+    displayContent=String(result);
 })
 
 const clear=document.querySelector(".clear");
@@ -105,6 +119,7 @@ clear.addEventListener("click",()=>{
 function AC()
 {
     display1.textContent="";
+    display.textContent="";
     displayContent='';
     numBeforeOperator=0;
     operator_value="";

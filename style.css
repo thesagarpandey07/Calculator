@@ -1,0 +1,27 @@
+.calculator{
+    display: flex;
+    flex-direction: column;
+    height: 50vh;
+    width: 25vw;
+    border: 2px solid red;
+}
+div.display,div.display1{
+    flex-basis: 10px;
+    flex-grow: 2;
+
+}
+
+div.keypad{
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100px;
+    flex-grow: 10;
+}
+div.row{
+    display: flex;
+    flex: 1;
+}
+
+button{
+    flex: 1;
+}

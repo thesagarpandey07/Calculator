@@ -95,4 +95,14 @@ equalsTo.addEventListener("click",()=>{
     display1.textContent=String(result);
 })
 
+const clear=document.querySelector(".clear");
+clear.addEventListener("click",()=>{
+    display1.textContent="";
+    displayContent='';
+    numBeforeOperator=0;
+    operator_value="";
+    numAfterOperator=1;
+    result=0;
+    last_Operator="";
+})
 

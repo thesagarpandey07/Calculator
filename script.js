@@ -11,6 +11,7 @@ let operator_value="";
 let numAfterOperator=1;
 let result=0;
 let last_Operator="";
+let isFirst=0;
 
 
 // const display=document.querySelector("div.display");
@@ -96,12 +97,28 @@ function findOut()
         return;
     // console.log("If i am present not returned");
 }
+
+    
     // console.log("Not returned");
-    numBeforeOperator=Number(arr[0]);
+    if(isFirst===0 || isFirst===1)
+{    numBeforeOperator=Number(arr[0]);
     numAfterOperator=Number(arr[1]);
+
     result=operate();
     last_Operator=operator_value;
-    // console.log(result);
+    if(arr[0]==="" && arr[2]===""){
+        result=-Number(arr[1]);
+        last_Operator=operator_value;
+    }
+    else if(arr[0]===""){
+        numBeforeOperator=-Number(arr[1]);
+        numAfterOperator=Number(arr[2]);
+        
+        result=operate();
+        last_Operator=operator_value;
+        
+    }
+    console.log(result);
     if(!Number.isInteger(result)) result=result.toFixed(2);
     display1.textContent=String(result)+operator_value;
     console.log(display1.textContent);
@@ -109,6 +126,35 @@ function findOut()
     // mode=1;
     displayContent=String(result)+operator_value;
     // displayContent=String(result);
+    }
+    else{
+        console.log("else is  working");
+        numBeforeOperator=result;
+        numAfterOperator=Number(arr[1]);
+        console.log(numBeforeOperator,numAfterOperator,last_Operator);
+        result=operate();
+        if(arr[0]==="" && arr[2]===""){
+        result=-Number(arr[1]);
+        last_Operator=operator_value;
+    }
+        else if(arr[0]===""){
+        numBeforeOperator=-Number(arr[1]);
+        numAfterOperator=Number(arr[2]);
+        
+        result=operate();
+        last_Operator=operator_value;
+        
+    }
+        last_Operator=operator_value;
+        if(!Number.isInteger(result)) result=result.toFixed(2);
+    display1.textContent=String(result)+operator_value;
+    console.log(display1.textContent);
+    // display.textContent=String(result);
+    // mode=1;
+    displayContent=String(result)+operator_value;
+    // displayContent=String(result);
+    }
+    isFirst++;
     return;
 }
 function operate()
@@ -151,4 +197,5 @@ function AC()
     result=0;
     last_Operator="";
     backgroundColorToNormal();
+    isFirst=0;
 }

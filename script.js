@@ -19,7 +19,7 @@ let isFirst=0;
 const nums=document.querySelectorAll(".number1");
 
 const display1=document.querySelector("div.display1");
-display1.textContent="";
+display1.textContent="0";
 
 let displayContent='';
 let mode=0;
@@ -192,7 +192,7 @@ clear.addEventListener("click",()=>{
 
 function AC()
 {
-    display1.textContent="";
+    display1.textContent="0";
     // display.textContent="";
     displayContent='';
     numBeforeOperator=0;

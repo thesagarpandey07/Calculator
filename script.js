@@ -49,8 +49,9 @@ function listenOperator()
 {
     // const operators=document.querySelectorAll(".keypad .operators");
     operators.forEach(operator=>{
-        equalsToMode=0;
+        
         operator.addEventListener("click",(e)=>{
+            equalsToMode=0;
             // operators.style.backgroundColor="white";
             equalsToMode=0;
            backgroundColorToNormal();

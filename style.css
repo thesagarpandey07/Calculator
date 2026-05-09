@@ -1,14 +1,32 @@
+body{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+
 .calculator{
     display: flex;
     flex-direction: column;
     height: 50vh;
-    width: 25vw;
-    border: 2px solid red;
+    aspect-ratio: 2/3;
+    /* border: 2px solid red; */
+    flex-basis: 500px;
+    flex-shrink: 1;
+    padding: 10px 5px;
+    background-color: black;
 }
 div.display,div.display1{
     flex-basis: 10px;
     flex-grow: 2;
-
+    align-self:stretch;
+    font-family: "Digital-7", monospace ;
+    align-content: center;
+    text-align: end;
+    background-color: gainsboro;
+    font-size: 4vh;
 }
 
 div.keypad{
@@ -24,4 +42,16 @@ div.row{
 
 button{
     flex: 1;
+    border: none;
+    background-color: white;
+    font-size: 3vh;
+    font-weight: 500;
+}
+
+.title{
+    padding: 10px;
+    margin: 10px;
+    font-size: 4vh;
+   flex-basis: 100px;
+   flex-shrink: 9;
 }

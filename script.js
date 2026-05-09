@@ -13,8 +13,8 @@ let result=0;
 let last_Operator="";
 
 
-const display=document.querySelector("div.display");
-display.textContent="";
+// const display=document.querySelector("div.display");
+// display.textContent="";
 const nums=document.querySelectorAll(".number1");
 
 const display1=document.querySelector("div.display1");
@@ -23,6 +23,15 @@ display1.textContent="";
 let displayContent='';
 let mode=0;
 
+const operators=document.querySelectorAll(".keypad .operators");
+
+function backgroundColorToNormal()
+{
+    operators.forEach(operator=>{
+                operator.style.backgroundColor="white";
+            })
+}
+
 function listenNumber()
 {
     const nummbers=document.querySelectorAll(".keypad .number1");
@@ -30,8 +39,8 @@ function listenNumber()
         number.addEventListener("click",(e)=>{
             if(display1.textContent==="ERROR") AC();
             let target=e.target;
-            if(mode===1) display.textContent="";
-            display.textContent+=String(target.value);
+            // if(mode===1) display.textContent="";
+            // display.textContent+=String(target.value);
             display1.textContent+=String(target.value);
             displayContent+=String(target.value);
             mode=0;
@@ -41,11 +50,14 @@ function listenNumber()
 listenNumber();
 function listenOperator()
 {
-    const operators=document.querySelectorAll(".keypad .operators");
+    // const operators=document.querySelectorAll(".keypad .operators");
     operators.forEach(operator=>{
         operator.addEventListener("click",(e)=>{
+            // operators.style.backgroundColor="white";
+           backgroundColorToNormal();
             if(display1.textContent==="ERROR") AC();
             let target=e.target;
+            target.style.backgroundColor="red";
             operator_value=String(target.value);
             // console.log(operator_value);
             display1.textContent+=operator_value;
@@ -84,8 +96,8 @@ function findOut()
     last_Operator=operator_value;
     // console.log(result);
     display1.textContent=String(result)+operator_value;
-    display.textContent=String(result);
-    mode=1;
+    // display.textContent=String(result);
+    // mode=1;
     displayContent=String(result)+operator_value;
     // displayContent=String(result);
     return;
@@ -105,6 +117,7 @@ function operate()
 
 const equalsTo=document.querySelector(".equalsto");
 equalsTo.addEventListener("click",()=>{
+    backgroundColorToNormal();
     findOut();
     operator_value="";
     display1.textContent=String(result);
@@ -119,11 +132,12 @@ clear.addEventListener("click",()=>{
 function AC()
 {
     display1.textContent="";
-    display.textContent="";
+    // display.textContent="";
     displayContent='';
     numBeforeOperator=0;
     operator_value="";
     numAfterOperator=1;
     result=0;
     last_Operator="";
+    backgroundColorToNormal();
 }

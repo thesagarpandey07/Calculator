@@ -22,6 +22,7 @@ display1.textContent="";
 
 let displayContent='';
 let mode=0;
+let equalsToMode=0;
 
 const operators=document.querySelectorAll(".keypad .operators");
 
@@ -40,6 +41,8 @@ function listenNumber()
             if(display1.textContent==="ERROR") AC();
             let target=e.target;
             // if(mode===1) display.textContent="";
+            if(equalsToMode===1) AC();
+            equalsToMode=0;
             // display.textContent+=String(target.value);
             display1.textContent+=String(target.value);
             displayContent+=String(target.value);
@@ -52,8 +55,10 @@ function listenOperator()
 {
     // const operators=document.querySelectorAll(".keypad .operators");
     operators.forEach(operator=>{
+        equalsToMode=0;
         operator.addEventListener("click",(e)=>{
             // operators.style.backgroundColor="white";
+            equalsToMode=0;
            backgroundColorToNormal();
             if(display1.textContent==="ERROR") AC();
             let target=e.target;
@@ -62,9 +67,9 @@ function listenOperator()
             // console.log(operator_value);
             display1.textContent+=operator_value;
             displayContent+=operator_value;
-            console.log(displayContent);
-            console.log(Number(displayContent));
-            console.log(Number(displayContent===NaN));
+            // console.log(displayContent);
+            // console.log(Number(displayContent));
+            // console.log(Number(displayContent===NaN));
             findOut();
             mode=1;
         })
@@ -75,10 +80,12 @@ listenOperator();
 function findOut()
 {
     // console.log(display1.textContent);
-    const arr=display1.textContent.split(/[+-/*]/);
-    const arr1=displayContent.split(/[+-/*]/);
-    // console.log(arr);
+    const arr=display1.textContent.split(/[+/*-]/);
+    const arr1=displayContent.split(/[+/*-]/);
+    console.log(arr);
+    
     if(arr[1]===undefined) {
+        result=Number(arr[0]);
         // console.log("returned due to arr[0]");
         return;}
     if(arr[1]===""){
@@ -95,7 +102,9 @@ function findOut()
     result=operate();
     last_Operator=operator_value;
     // console.log(result);
+    if(!Number.isInteger(result)) result=result.toFixed(2);
     display1.textContent=String(result)+operator_value;
+    console.log(display1.textContent);
     // display.textContent=String(result);
     // mode=1;
     displayContent=String(result)+operator_value;
@@ -117,9 +126,11 @@ function operate()
 
 const equalsTo=document.querySelector(".equalsto");
 equalsTo.addEventListener("click",()=>{
+    equalsToMode=1;
     backgroundColorToNormal();
     findOut();
     operator_value="";
+
     display1.textContent=String(result);
     displayContent=String(result);
 })

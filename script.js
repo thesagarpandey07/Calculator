@@ -84,7 +84,11 @@ function findOut()
     const arr=display1.textContent.split(/[+/*-]/);
     const arr1=displayContent.split(/[+/*-]/);
     console.log(arr);
-    
+    if(arr[0]==="" && arr[1]===""){
+        AC();
+        return;
+    }
+
     if(arr[1]===undefined) {
         result=Number(arr[0]);
         // console.log("returned due to arr[0]");
